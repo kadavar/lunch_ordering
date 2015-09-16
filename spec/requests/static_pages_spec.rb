@@ -16,7 +16,9 @@ describe "Static pages" do
          let(:heading) {'Lunch Ordering'}
          let(:page_title) {''}
          it {should_not have_title ('Lunch Ordering')}
-         it { should have_link("Sign up now", href: root_path) }
+         it { should have_link("Sign up now", href: signup_path) }
      end
 
+    
+    
 end
