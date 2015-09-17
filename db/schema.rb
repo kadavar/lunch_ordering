@@ -17,10 +17,7 @@ ActiveRecord::Schema.define(version: 20150916231050) do
     t.string "role"
   end
 
-  create_table "user_roles", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
+
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
