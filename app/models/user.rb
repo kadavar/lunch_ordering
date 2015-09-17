@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-     has_many :roles, through: :user_role , source: :user
+    before_save {email.downcase!}
+    has_many :roles, through: :user_role , source: :user
      validates :name,  presence: true, length: { maximum: 50 }
     validates :password, length: { minimum: 6 }
     
