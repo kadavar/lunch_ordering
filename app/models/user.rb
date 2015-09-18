@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
     def assign_role
         # first user - Lunch Admin
          if User.count==0   
-             self.roles= Role.all
-            
+             self.roles= Role.all 
          else 
              self.roles=Role.where(role:"user")
          end      
