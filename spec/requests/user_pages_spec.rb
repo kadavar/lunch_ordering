@@ -15,8 +15,7 @@ describe "User pages" do
     
     describe "profile page" do
    
-        let(:user) {User.create!(name: "Example User", email: "user@example.com",
-                     password: "foobar", password_confirmation: "foobar") }
+        let(:user) {FactoryGirl.create(:user) }
         
          before { visit user_path(user) }
 

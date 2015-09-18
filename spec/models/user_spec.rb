@@ -13,11 +13,13 @@ before do
     subject {@user}
   it {should respond_to(:name) }
   it {should respond_to(:email)}
-  it { should respond_to(:password_digest) }
-  it { should respond_to(:password) }
-  it { should respond_to(:password_confirmation) }
-  it { should respond_to(:authenticate) }
-    it { should be_valid }
+  it {should respond_to(:password_digest) }
+  it {should respond_to(:password) }
+  it {should respond_to(:password_confirmation) }
+  it {should respond_to(:authenticate) }
+  it {should respond_to(:remember_token) }
+   
+it { should be_valid }
      
 describe "when name is not present" do
     before { @user.name = " " }
@@ -96,6 +98,16 @@ describe "when password doesn't match confirmation" do
     it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_falsey }
   end
+describe "assign role to user"  do
+    it {should respond_to(:roles) }
+
+ end
+describe "not assign role to user"  do
+    before{@user.roles=Array.new}
+    it {expect(@user.roles).to  eq Array.new }
+    
+ end
+
  end
 
 end
