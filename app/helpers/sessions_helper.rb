@@ -37,4 +37,10 @@ def sign_out
   def store_location
     session[:return_to] = request.url if request.get?
   end
+    
+    def user_is_admin?   
+     c=current_user
+      !c.roles.where(role:"admin").empty?  
+end
+    
 end

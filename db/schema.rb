@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918010008) do
+ActiveRecord::Schema.define(version: 20150919170627) do
+
+  create_table "foods", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "role"

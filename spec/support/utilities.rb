@@ -11,4 +11,11 @@ def sign_in(user, options={})
     fill_in "Password", with: user.password
     click_button "Sign in"
   end
+    
+    
+    def create_admin(user)
+        Role.create!(role:"admin")
+        Role.create!(role:"user")
+        user.roles = Role.all
+    end
 end
