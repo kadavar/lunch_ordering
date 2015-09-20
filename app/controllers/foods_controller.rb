@@ -4,9 +4,11 @@ class FoodsController < ApplicationController
 
     
     def new
+        
      unless user_is_admin?
-       redirect_to root_user
+       redirect_to root_path
     end
+        
   end
     
     def create
@@ -31,7 +33,8 @@ class FoodsController < ApplicationController
        redirect_to root_path
        end
          @foods= Food.paginate(page: params[:page])
-      
+         @foods_second= Food.where(course: "second").paginate(page: params[:page])
+         @foods_drink= Food.where(course: "drink").paginate(page: params[:page])
      end
     
     def edit
@@ -43,10 +46,12 @@ class FoodsController < ApplicationController
     end
     
   def update
+        @food = Food.find(params[:id])
       if @food.update_attributes(food_params)
           flash[:success] = "Item updated"
           redirect_to foods_path
     else
+          flash[:error] = "Invalid data"
       render 'edit'
     end
   end

@@ -20,6 +20,21 @@ describe "User pages" do
     it { should have_title('All users') }
     it { should have_content('All users') }
     
+    describe "delete links if admin" do
+
+      it { should have_link('delete') }
+     end
+    
+    describe "delete links if user" do
+        before do
+         sign_in  FactoryGirl.create(:user, name: "Bob", email: "bosb@example.com")
+         visit users_path
+        end
+        
+        it { should_not have_link('delete') }
+        
+     end
+    
     describe "pagination" do
 
       before(:all) { 30.times { FactoryGirl.create(:user) } }
@@ -31,6 +46,7 @@ describe "User pages" do
         User.paginate(page: 1).each do |user|
           expect(page).to have_selector('li', text: user.name)
         end
+          
       end
     end
     it "should list each user" do

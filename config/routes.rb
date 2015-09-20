@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
     match '/foods',  to: 'foods#index',            via: 'get'
     match '/newfood',    to: 'foods#new',    via: 'get'
+   
     
     
   # The priority is based upon order of creation: first created -> highest priority.

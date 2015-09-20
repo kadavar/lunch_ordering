@@ -4,9 +4,12 @@ FactoryGirl.define do
     sequence(:email) { |n| "person_#{n}@example.com"}
     password "foobar"
     password_confirmation "foobar"
-
-   
   end
-
+    
+    factory :food do
+        sequence(:name)  { |n| "Food #{n}" }
+        sequence(:price) { |n| "32#{n}"}
+        course "first" 
+  end
   
 end
