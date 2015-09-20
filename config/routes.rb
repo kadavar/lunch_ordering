@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
 
    resources :users
-   resources :foods
+    resources :foods
    resources :sessions, only: [:new, :create, :destroy]
     
   root  'static_pages#home'
@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
     match '/foods',  to: 'foods#index',            via: 'get'
+    match '/newfood',    to: 'foods#new',    via: 'get'
+    
+    
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

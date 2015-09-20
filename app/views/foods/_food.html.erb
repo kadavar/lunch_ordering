@@ -1,0 +1,10 @@
+<li>
+  
+    <%= link_to food.name,  edit_food_path(food)%>
+    <%= food.price %>
+    <%= food.course %>
+    <% if user_is_admin? %>
+    | <%= link_to "delete",food, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

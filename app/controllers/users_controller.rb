@@ -10,9 +10,7 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
         
-    def show
-       @user = User.find(params[:id])
-    end
+  
     
   def new
         @user = User.new
@@ -31,6 +29,13 @@ class UsersController < ApplicationController
    def edit
     @user = User.find(params[:id])
   end
+      def show
+       @user = User.find(params[:id])
+          if (params[:id]!=current_user.id)
+              render 'edit'
+              
+          end
+    end
     
   def update
     if @user.update_attributes(user_params)

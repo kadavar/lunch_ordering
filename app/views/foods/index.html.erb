@@ -1,1 +1,38 @@
-<% provide(:title,'Foods') %>
+<% provide(:title,'All Food') %>
+<div class="row">
+  <div class="span10 offset4">
+      <%= link_to "Add a new food", newfood_path, class: "btn btn-large btn-primary" %>
+      <h1>All Food</h1>
+    <div class ="row" >
+        <div class="span 4">
+            <h4>First course</h4>
+        <%= will_paginate %>
+<ul class="foods foods_first">
+    <%= render @foods.where(course: "first") %>
+</ul>
+
+<%= will_paginate %>
+            
+        </div> 
+        <div class="span 4">
+             <h4>Second course</h4>
+        <%= will_paginate %>
+<ul class="foods foods_second">
+    <%= render @foods.where(course: "second") %>
+</ul>
+
+<%= will_paginate %>
+        </div> 
+        <div class="span 4">
+            <h4>Drink course</h4>
+        <%= will_paginate %>
+<ul class="foods foods_drink">
+    <%= render @foods.where(course: "drink") %>
+</ul>
+
+<%= will_paginate %>
+        </div> 
+    </div> 
+
+    </div>
+</div>

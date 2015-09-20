@@ -39,8 +39,12 @@ def sign_out
   end
     
     def user_is_admin?   
-     c=current_user
-      !c.roles.where(role:"admin").empty?  
+        if current_user
+        c=current_user
+      !c.roles.where(role:"admin").empty?
+        else 
+        c=nil
+        end
 end
     
 end

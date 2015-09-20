@@ -1,10 +1,9 @@
-<% provide(:title,'New Food') %>
-<h1>New Food</h1>
+<% provide(:title, "Edit user") %>
+<h1>Update food</h1>
 
 <div class="row">
   <div class="span6 offset6">
-     
-      <%= form_for(:food, url: foods_path) do |f| %>
+       <%= form_for(:food, url: foods_path) do |f| %>
 
       <%= f.label :food_name %>
       <%= f.text_field :name %>
@@ -17,6 +16,6 @@
       <%= f.submit "Create Food", class: "btn btn-large btn-primary" %>
     <% end %>
 
-  
+    
   </div>
 </div>
