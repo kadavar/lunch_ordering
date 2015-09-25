@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
     before_create :create_remember_token,:assign_role
     has_many :roles, through: :UserRoles , source: :role
     has_many :UserRoles , dependent: :destroy
+
+    has_many :orders
+
+    has_many :baskets, dependent: :destroy
+    has_many :foods, through: :baskets , source: :food
      validates :name,  presence: true, length: { maximum: 50 }
     validates :password, length: { minimum: 6 }
     

@@ -8,6 +8,14 @@
 </head>
      <%= render 'layouts/header'%>
 <body>
+    <% if signed_in? %>
+    <div class="row offset1 " id="basket">
+      <%= render 'baskets/basket' %>
+    </div>
+      
+  
+    <% end %>
+    <div class="messages"></div>
  <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>     

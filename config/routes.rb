@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
  
-  
+    resources :menus do
+        post :addFood, :on => :member
+        post :deleteFood, :on => :member
+end
 
-   resources :users
+    resources :users
+    resources :baskets
+    resources :menus
     resources :foods
-   resources :sessions, only: [:new, :create, :destroy]
+    resources :orders 
+    resources :sessions, only: [:new, :create, :destroy,:update]
     
   root  'static_pages#home'
   
@@ -17,7 +23,15 @@ Rails.application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
     match '/foods',  to: 'foods#index',            via: 'get'
     match '/newfood',    to: 'foods#new',    via: 'get'
-   
+    match '/tomenu',    to: 'menus#addFood',    via: 'post'
+    match '/frommenu',    to: 'menus#deleteFood',    via: 'post'
+    match '/dashboard',    to: 'orders#dashboard',    via: 'get'
+    match '/weekday',    to: 'orders#weekday',    via: 'get'
+    match '/tobasket',    to: 'baskets#create',    via: 'post'
+    match '/days',    to: 'orders#show',    via: 'get'
+    match '/search',    to: 'orders#search  ',    via: 'get'
+    
+    match '/getJson',    to: 'orders#getJson  ',    via: 'get'
     
     
   # The priority is based upon order of creation: first created -> highest priority.

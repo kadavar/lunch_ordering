@@ -1,0 +1,10 @@
+$(document).ready(function () {
+    $('.messages').append('<div class="alert alert-notice">Food remove form Order </div>');
+ $("#basket").empty();
+    
+setTimeout(function(){
+    $("#basket").append("<%= escape_javascript(render partial: 'basket' ) %>"); 
+      $('.messages').empty();
+}, 2000);
+
+});

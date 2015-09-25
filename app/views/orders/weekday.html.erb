@@ -1,0 +1,57 @@
+<% provide(:title,'Menu') %>
+<div class="row">
+ <div class="span16 offset1 today_menu ">
+    
+      <h1>Menu for <%= @weekday %></h1>
+      
+    <div class ="row" >
+       
+        <div class="span5 today today_first">
+       <div class="heads span4">     <h4>First course</h4>
+       <div class="span1"><b>Name</b></div> 
+        <div class="span1"><b>Price</b></div>
+            <div class="span1  ation_span"><b>Action</b></div> 
+            <br></div>
+<ul class="foods foods_first ul_today">
+    <% @foods[:first].each do |f| %>
+    <%= render :partial => "food", :locals => {:food => f} %>
+    <% end %>
+</ul>
+
+
+            
+        </div> 
+         <div class="span5 today today_second">
+          <div class="heads span4">    <h4>Second course</h4>
+        <div class="span1"><b>Name</b></div> 
+        <div class="span1"><b>Price</b></div>
+            <div class="span1 ation_span"><b>Action</b></div><br></div>
+<ul class="foods foods_second ul_today">
+    <% @foods[:second].each do |f| %>
+    <%= render :partial => "food", :locals => {:food => f} %>
+    <% end %>
+   
+</ul>
+
+
+        </div> 
+        <div class="span5 today today_drink">
+           <div class="heads span4">   <h4>Drink course</h4>
+       <div class="span1"><b>Name</b></div> 
+        <div class="span1"><b>Price</b></div>
+           <div class="span1  ation_span"><b>Action</b></div><br></div>
+          
+<ul class="foods foods_drink ul_today">
+    <%  @foods[:drink].each do |f| %>
+    <%= render :partial => "food", :locals => {:food => f} %>
+    <% end %>
+   
+</ul>
+
+
+        </div> 
+       
+    </div> 
+   
+    </div>
+</div>

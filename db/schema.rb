@@ -11,14 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919170627) do
+ActiveRecord::Schema.define(version: 20150924024034) do
+
+  create_table "baskets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "food_id"
+    t.string   "food_course"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "baskets", ["food_id", "user_id", "food_course"], name: "index_baskets_on_food_id_and_user_id_and_food_course", unique: true
+  add_index "baskets", ["food_id", "user_id"], name: "index_baskets_on_food_id_and_user_id", unique: true
+  add_index "baskets", ["user_id", "food_course"], name: "index_baskets_on_user_id_and_food_course", unique: true
 
   create_table "foods", force: :cascade do |t|
     t.string   "name"
-      t.real  "price"
-    t.string   "range"
+    t.decimal  "price"
+    t.string   "course"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "in_menu",    default: false
+  end
+
+  create_table "menu_foods", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.integer  "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "menu_foods", ["food_id", "menu_id"], name: "index_menu_foods_on_food_id_and_menu_id", unique: true
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "weekday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_foods", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "food_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|

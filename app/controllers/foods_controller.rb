@@ -1,7 +1,7 @@
 class FoodsController < ApplicationController
- before_action :signed_in?, only: [:index, :edit, :update, :destroy]
+    before_action :signed_in?, only: [:index, :edit, :update, :destroy]
     before_action :user_is_admin?, only: [:index, :edit, :update, :destroy]
-
+    before_action :sign_check
     
     def new
         
@@ -15,6 +15,7 @@ class FoodsController < ApplicationController
         @food=Food.new(food_params)
         if @food.save
             flash[:succes]= "Food added"
+            Food.addFood(@food)
              redirect_to foods_path
         else 
             flash[:error]="Error"
@@ -29,12 +30,9 @@ class FoodsController < ApplicationController
   end
     
      def index
-         unless user_is_admin? && signed_in?
-       redirect_to root_path
-       end
-         @foods= Food.paginate(page: params[:page])
-         @foods_second= Food.where(course: "second").paginate(page: params[:page])
-         @foods_drink= Food.where(course: "drink").paginate(page: params[:page])
+         @menu_food=Menu.todayFoods(Menu.todayMenu.weekday)
+         @foods=Food.allFoods(params[:first_page],params[:second_page],params[:drink_page])
+       
      end
     
     def edit

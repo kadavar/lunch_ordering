@@ -1,0 +1,11 @@
+$(document).ready(function () {
+  $('.messages').append('<div class="alert alert-succes">Food added to Order </div>'); 
+ $("#basket").empty();
+    
+setTimeout(function(){
+     if(("#basket").html="")
+     $("#basket").append("<%= escape_javascript(render partial: 'basket' ) %>"); 
+      $('.messages').empty();
+}, 2000);
+   
+});

@@ -1,0 +1,59 @@
+<% provide(:title , "Create Order") %>
+<div class ="row" >
+    <h1> Today Menu</h1>
+</div>
+<%= form_for(:order, url: orders_path) do |f| %>
+<div class="row">
+    
+<div class="span4 offset2">
+    <h2>First Course</h2>
+    <% @foods_menu_first.each do|food|  %>
+    <div class="row">
+        <div class="span4 offset1">
+            <%= food.name %>
+            <%= food.price %>
+           
+            <span class="first_course" dir="add" food="<%= food.id %>">+</span>
+        </div>
+    </div>
+  
+    <% end %>
+</div>
+   <div class="span4 ">
+    <h2>Second Course</h2>
+       <% @foods_menu_second.each do|food|  %>
+    <div class="row">
+        <div class="span4 offset1">
+            <%= food.name %>
+            <%= food.price %>
+               <span class="second_course" dir="add" food="<%= food.id %>">+</span>
+        </div>
+    </div>
+  
+    <% end %>
+</div>
+    <div class="span4 ">
+    <h2>Drink</h2>
+        <% @foods_menu_drink.each do|food|  %>
+    <div class="row">
+        <div class="span4 offset1">
+            <%= food.name %>
+            <%= food.price %>
+               <span class="drink_course" dir="add" food="<%= food.id %>">+</span>
+        </div>
+    </div>
+  
+    <% end %>
+
+</div>
+  
+    <%=  hidden_field(:food, :first_course, :value => 0) %>
+    <%=  hidden_field(:food, :second_course, :value => 0) %>
+    <%=  hidden_field(:food, :drink_course, :value => 0) %>
+
+ 
+</div>
+<div class="row">
+ <%= f.submit "Create Order", class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>   

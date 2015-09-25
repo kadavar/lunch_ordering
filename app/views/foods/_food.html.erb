@@ -1,10 +1,19 @@
+
+ <% if(!food.menus.find_by(id: Menu.todayMenu.id)) %>
 <li>
   
-    <%= link_to food.name,  edit_food_path(food)%>
-    <%= food.price %>
-    <%= food.course %>
+   <div class="span1"><%= link_to food.name,  edit_food_path(food)%></div> 
+   <div class="span1"><%= food.price %> </div>
+   
     <% if user_is_admin? %>
-    | <%= link_to "delete",food, method: :delete,
+    <div class="span2">   <%= link_to "Delete",food, method: :delete,
                                   data: { confirm: "You sure?" } %>
-  <% end %>
+    
+    | <%= link_to "Add to Menu", tomenu_path( :id => food.id), :method => :post %></div>
+  
+    
+  
+ <% end %>
+   
 </li>
+<% end %>

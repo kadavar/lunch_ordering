@@ -48,8 +48,11 @@ describe "Foods page" do
              
             let(:submit) { "Create Food" }
             
-             it "succes create food" do
-             expect { click_button submit }.to change(Food, :count)
+             describe "succes create food" do
+             
+                 subject { -> { click_button submit } }
+                 it{ should change(Food, :count) }
+                 it{ should change(Menu.todayMenu.foods , :count)}
             end
              
              describe "after succes create food" do
@@ -69,28 +72,71 @@ describe "index" do
     before do 
         visit foods_path
     end
-   it{ should have_title('All Food')}
-   it{ should have_content('All Food')}
+    it{ should have_title('Today Menu')}
+    it{ should have_content('All Food')}
   
     
     describe "pagination" do
-
+        
         before(:all) { 
              visit foods_path
             32.times { FactoryGirl.create(:food) } }
         after(:all)  { Food.delete_all }
-
+        
+        
+        let(:add) {'Add to Menu'}
       it { should have_selector('div.pagination') }
 
         it "should list each food" do
             Food.paginate(page: 1).each do |food|
             expect(page).to have_selector('li')
-            expect(page).to have_link('delete') 
-   
+            expect(page).to have_link('Delete') 
         end
+            
        end
+       
       end
+      describe "delete working" do
+          before do
+            FactoryGirl.create(:food)
+            visit foods_path
+          end
+        it "have a link delete" do
+            expect(page).to have_link('Delete')
+            expect { click_on 'Delete' }.to change(Food, :count)
+        end
+      end
+      
+    describe 'add to menu' do
+        before do
+            FactoryGirl.create(:food)
+            visit foods_path
+        end
+        
+        it "add to menu"  do
+        expect(page).to have_link('Delete')
+        expect(page).to have_link('Add to Menu')
+        expect { click_on 'Add to Menu' }.to change(Menu.todayMenu.foods, :count)
+        expect(page).to have_link('Remove from Menu')
+        expect(page).not_to have_link('Delete')
+        end
+    
+        describe 'remove from menu' do
+            before { click_on 'Add to Menu'}
+            it "remove form menu" do
+                expect(page).not_to have_link('Delete')
+                expect(page).to have_link('Remove from Menu')         
+                expect { click_on 'Remove from Menu' }.to change(Menu.todayMenu.foods, :count)
+                expect(page).not_to have_link('Remove from Menu')
+                expect(page).to have_link('Delete')
+                expect(page).to have_link('Add to Menu')
+                
+            end
+        end
+        
     end
+    
+ end
 describe "edit " do
     before do
         f=FactoryGirl.create(:food)

@@ -1,0 +1,19 @@
+
+
+<li>
+  
+       
+   <div class="span1"><%= link_to food.name,  edit_food_path(food)%></div> 
+   <div class="span1"><%= food.price %></div> 
+   
+    <% if user_is_admin? %>
+   
+    
+   
+    <div class="span2"> <%= link_to "Remove from Menu", frommenu_path( :id => food.id), :method => :post %></div>
+  
+    
+  
+ <% end %>
+   
+</li>

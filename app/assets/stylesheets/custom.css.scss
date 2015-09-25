@@ -1,6 +1,14 @@
 @import "bootstrap";
 
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../assets/glyphicons-halflings-regular.woff') format('woff'),
+  url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
 $grayMediumLight: #eaeaea;
 
 
@@ -10,7 +18,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top:100px;
 }
 
 section {
@@ -177,4 +185,112 @@ input {
       border-bottom: 1px solid $grayLighter;
     }
   }
+}
+.today
+{
+ margin:0;
+     text-align: center;
+}
+.ul_today
+{
+    text-align: center;
+    margin:0;
+        
+    li {
+    list-style-type: none; 
+   }
+}
+.new_food_but
+{
+    
+    text-align: center;
+}
+.to_order_form
+{
+ margin:0;   
+}
+.ation_span
+{
+ text-align: center
+}
+#basket
+{
+     border: 2px solid;
+  position: fixed;
+  background-color: #FAFAF4;
+  margin-top: -60px;
+   
+  border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.dashboard {
+    text-align: center;
+    
+.weekday
+{   
+  position: relative;
+    float: left;
+  width: 10em;
+  border: 1px double;
+  border-radius: 2px;
+  /* align-items: center; */
+  background-color: #E9F5EF;
+  height: 3em;
+  
+    .weekday_title
+    {
+        vertical-align: middle;
+         text-align: center;
+          
+    }
+}:hover 
+    {
+      background-color:  #B7F5D4;
+        color:black;
+    }
+}
+
+
+.form_search
+{
+    #search{
+            width:10em; 
+    }
+    .date_info
+    {
+     float:left;
+    }
+}
+.orders_ul
+{
+    li {
+    list-style-type: none; 
+   }
+}
+
+.order_info
+{
+ margin:0;   
+}
+.order_info_margin
+{
+ margin-left:1.4em;   
+}
+
+.order_info_last
+{
+ margin-left:3.6em;   
+}
+
+.food_heads
+{
+ margin-left:-2.2em;   
+}
+.heads
+{
+ border-bottom: 2px solid;
+}
+.order_p
+{
+     border-bottom: 1px solid;
 }

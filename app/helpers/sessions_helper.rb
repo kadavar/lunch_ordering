@@ -5,6 +5,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
+            
   end
     
    def current_user=(user)
@@ -20,8 +21,15 @@ module SessionsHelper
     user == current_user
   end
  def signed_in?
-    !current_user.nil?
+    !current_user.nil?  
   end
+    
+    def sign_check
+        if !signed_in?
+            redirect_to root_path
+            flash[:notice]='Please sign up  '
+        end
+    end
     
 def sign_out
  current_user.update_attribute(:remember_token,
@@ -47,4 +55,13 @@ def sign_out
         end
 end
     
+   
+    
+  
+    
+    
+    
+    def MenuFoods(weekday)
+        @foods=Menu.find_by(weekday: weekday).foods
+    end
 end
