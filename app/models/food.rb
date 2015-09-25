@@ -3,7 +3,7 @@ class Food < ActiveRecord::Base
     validates :course, length: { minimum: 3 },  presence: true
     
     REGEX=/\-?\d+(\.\d{0,})?/i
-    validates :price,  presence: true, format: { with: REGEX },length: { maximum: 6 }
+    validates :price,  presence: true, format: { with: REGEX },length: { maximum: 15 }
     has_many :menus, through: :MenuFoods , source: :menu
     has_many :MenuFoods , dependent: :destroy
     

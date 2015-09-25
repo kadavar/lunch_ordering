@@ -73,7 +73,7 @@ describe "index" do
         visit foods_path
     end
     it{ should have_title('Today Menu')}
-    it{ should have_content('All Food')}
+    it{ should have_content('Rest of  Food')}
   
     
     describe "pagination" do
