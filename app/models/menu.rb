@@ -15,4 +15,6 @@ class Menu < ActiveRecord::Base
          @today_foods[:drink]=@foods.where(course: "drink")
          @today_foods
     end
+    
+    
 end

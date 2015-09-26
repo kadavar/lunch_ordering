@@ -31,7 +31,7 @@ end
     match '/days',    to: 'orders#show',    via: 'get'
     match '/search',    to: 'orders#search  ',    via: 'get'
     
-    match '/getJson',    to: 'orders#getJson  ',    via: 'get'
+    match '/getJsons',    to: 'orders#getJsons',    via: 'get'
     
     
   # The priority is based upon order of creation: first created -> highest priority.

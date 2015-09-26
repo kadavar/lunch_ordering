@@ -9,11 +9,10 @@
      <%= render 'layouts/header'%>
 <body>
     <% if signed_in? %>
-    <div class="row offset1 " id="basket">
+    <div  class="row offset1 " id="basket">
       <%= render 'baskets/basket' %>
     </div>
-      <div id="open_basket">O</div>
-  
+    <div tabindex="0" id="show_basket"><i class="fa fa-shopping-cart"></i> </div>
     <% end %>
     <div class="messages"></div>
  <% flash.each do |key, value| %>

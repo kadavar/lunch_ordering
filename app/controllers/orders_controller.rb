@@ -8,8 +8,8 @@ class OrdersController < ApplicationController
      
     end
     
-    def getJson   
-        @json=Order.getJson
+    def getJsons   
+       render :json => Order.getJson
     end
     
     def dashboard

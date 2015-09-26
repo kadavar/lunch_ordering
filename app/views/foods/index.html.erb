@@ -13,9 +13,8 @@
         <div class="span1"><b>Name</b></div> 
             <div class="span1"><b>Price</b></div><div class="span1  ation_span"><b>Action</b></div><br> </div>
 <ul class="foods food_first_today_menu ul_today">
-    <% @menu_food[:first].each do |f| %>
-    <%= render :partial => "menu_food", :locals => {:food => f} %>
-    <% end %>
+    <%= render @menu_food[:first], :menu => true %>
+    
     
 </ul>
 
@@ -29,9 +28,7 @@
            <div class="span1  ation_span"><b>Action</b></div><br></div>
 <ul class="foods food_second_today_menu ul_today">
   
-    <% @menu_food[:second].each do |f| %>
-    <%= render :partial => "menu_food", :locals => {:food => f} %>
-    <% end %>
+    <%= render @menu_food[:second], :menu => true %>
 </ul>
 
 
@@ -42,9 +39,7 @@
         <div class="span1"><b>Price</b></div>
            <div class="span1 ation_span"><b>Action</b><br></div></div>
 <ul class="foods food_drink_today_menu ul_today">
-    <% @menu_food[:drink].each do |f| %>
-    <%= render :partial => "menu_food", :locals => {:food => f} %>
-    <% end %>
+    <%= render @menu_food[:drink], :menu => true %>
 </ul>
 
 
@@ -69,7 +64,7 @@
         <div class="span1"><b>Price</b></div> 
             <div class="span1  ation_span"><b>Action</b></div><br></div>
 <ul class="foods all_food_first ul_today">
-    <%= render @foods[:first] %>
+    <%= render @foods[:first],  :menu => false%>
 </ul>
 
 <%= will_paginate @foods[:first], :param_name => 'first_page' %>
@@ -81,7 +76,7 @@
         <div class="span1"><b>Price</b></div>
            <div class="span1 ation_span"><b>Action</b></div><br></div> 
 <ul class="foods all_food_second ul_today">
-    <%= render @foods[:second] %>
+    <%= render @foods[:second] , :menu => false %>
 </ul>
             <%= will_paginate @foods[:second] ,:param_name => 'second_page'%>
 
@@ -92,7 +87,7 @@
         <div class="span1"><b>Price</b></div>
        <div class="span1  ation_span"><b>Action</b></div><br> </div> 
 <ul class="foods all_food_drink ul_today">
-    <%= render @foods[:drink] %>
+    <%= render @foods[:drink], :menu => false %>
 </ul>
             <%= will_paginate @foods[:drink] ,:param_name => 'drink_page'%>
 

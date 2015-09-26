@@ -29,4 +29,19 @@ class Food < ActiveRecord::Base
         Menu.todayMenu.foods.push(food)
         
     end
+    
+    def self.otherFood(page,page_second,page_drink)
+        menufood=Menu.todayMenu.foods
+        allFood=Food.all
+        @food=Hash.new
+        
+        @food[:first]=(all.where(course:"first")-menufood.where(course: "first")).paginate(page: page)
+        
+        @food[:second]=(all.where(course:"second")-menufood.where(course: "second")).paginate(page: page_second)
+        
+        @food[:drink]=(all.where(course:"drink")-menufood.where(course: "drink")).paginate(page: page_drink)
+        @food
+    
+    end    
+    
 end

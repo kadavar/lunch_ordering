@@ -31,7 +31,7 @@ class FoodsController < ApplicationController
     
      def index
          @menu_food=Menu.todayFoods(Menu.todayMenu.weekday)
-         @foods=Food.allFoods(params[:first_page],params[:second_page],params[:drink_page])
+         @foods=Food.otherFood(params[:first_page],params[:second_page],params[:drink_page])
        
      end
     

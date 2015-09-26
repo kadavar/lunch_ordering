@@ -213,29 +213,33 @@ input {
 {
  text-align: center
 }
+#show_basket 
+{
+  position: fixed;
+  background-color: #F7F5F5;
+  margin-top: -60px;
+  right: 2.6em;
+  font-size: 3.5em;
+  border: 1px solid;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px
+}
 #basket
 {
+
   border: 2px solid;
   position: fixed;
   background-color: #FAFAF4;
   margin-top: -60px;
-   visibility: hidden;
+   right:10em;
   border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-#hide_basket
-{
-    position: absolute;
+#show_basket:focus ~ #basket {
+   display: block;
 }
-#open_basket 
-{
-    position: fixed;
-  background-color: #FAFAF4;
- margin-top:-60px;  
-    right:2em;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
+
+
 .dashboard {
     text-align: center;
     
