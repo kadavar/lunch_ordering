@@ -1,59 +1,67 @@
-<% provide(:title ,"Dates") %>
-<div class ="row offset1 date_infos">
+<% provide(:title, "Dates") %>
+<div class="row offset1 date_infos">
 
-    <div class="form_search span4">
-<%= form_tag days_path, :method => 'get' do %>
-  <div class="total_cost date_info">
-      <h4>Order for  </h4>
-      <%= date_field_tag :search, params[:search],:value => @date%>
-    <%= submit_tag "Sumbit", :name => nil %>
-    
- <h4>Total : <%=@total %></h4>
+  <div class="form_search span4">
+    <%= form_tag days_path, :method => 'get' do %>
+        <div class="total_cost date_info">
+          <h4>Order for </h4>
+          <%= date_field_tag :search, params[:search], :value => @date %>
+          <%= submit_tag "Sumbit", :name => nil %>
 
-    <div class="total_count date_info">
-<h4>  Count :<%= @today_orders.all.count %></h4>
-    </div>
-      </div>
-<% end %>
-      
-</div>
+          <h4>Total : <%= @total %></h4>
 
-
-
-</div>
-
- 
-<div class="row"><h1>Orders :</h1></div> 
-<div class="row offset1">
-    
-  
-    <div class="row heads span20">
-   <b> <div class="span2">User</div>
-         <div class="span3">Time</div>
-         <div class="span2">First<br>
-        <div class="span2 food_heads">Name | Price</div>
-            
+          <div class="total_count date_info">
+            <h4> Count :<%= @today_orders.all.count %></h4>
+          </div>
         </div>
-         <div class="span2">Second<br>
-        <div class="span2 food_heads">Name | Price</div></div>
-         <div class="span2">Drink<br>
-        <div class="span2 food_heads">Name | Price</div></div>
-         <div class="span1">Total</div><br></b>
-    </div>
-    <br>
-     <% if @today_orders.count > 0 %>
-    <ul class="foods orders_ul">
-       
+    <% end %>
+
+  </div>
+
+
+</div>
+
+
+<div class="row"><h1>Orders :</h1></div>
+<div class="row offset1">
+
+
+  <div class="row heads span20">
+    <b>
+      <div class="span2">User</div>
+      <div class="span3">Time</div>
+      <div class="span2">First<br>
+
+        <div class="span2 food_heads">Name | Price</div>
+
+      </div>
+      <div class="span2">Second<br>
+
+        <div class="span2 food_heads">Name | Price</div>
+      </div>
+      <div class="span2">Drink<br>
+
+        <div class="span2 food_heads">Name | Price</div>
+      </div>
+      <div class="span1">Total</div>
+      <br></b>
+  </div>
+  <br>
+  <% if @today_orders.count > 0 %>
+      <ul class="foods orders_ul">
+
         <% @today_orders.each do |o| %>
-        <%= render :partial => "orders/order", :locals => {:order => o} %>
-       
-          <% end %>
-    </ul>
-     <%= will_paginate @today_orders %>
-    <% else %>
-    <br><h1>No Orders</h1>
-     <% end %>
-    
+            <%= render :partial => "orders/order", :locals => {:order => o} %>
+
+        <% end %>
+      </ul>
+      <%= will_paginate @today_orders %>
+  <% else %>
+      <br>
+
+      <h1>No Orders</h1>
+  <% end %>
+
 </div>
   
 

@@ -1,23 +1,17 @@
 <li>
-  
-    <div class="span1"><%=  food.name%></div> 
-   <div class="span1"><%= food.price %></div> 
-   
-    
-  
-   
-   
- 
-  <div class="span2">  <%= form_for(:basket, url: tobasket_path, remote: true ,:html => {:id=>'food_form'+food.id.to_s,:class =>'to_order_form'}) do |f| %>
-    <div><%= hidden_field_tag(:food,value=food.id)%></div>
-    <% #f.submit "Add" 
-    oclick="$('#food_form"+food.id.to_s+"').submit()"
-    %>
-    <%= link_to 'Add to Order', "#", :onclick => "$('#food_form"+food.id.to_s+"').submit()"  %>
-    
-  
-    
-    
-<% end %>
-   </div> 
+
+  <div class="span1"><%= food.name %></div>
+  <div class="span1"><%= food.price %></div>
+
+
+  <div class="span2">  <%= form_for(:basket, url: tobasket_path, remote: true, :html => {:id => 'food_form'+food.id.to_s, :class => 'to_order_form'}) do |f| %>
+        <div><%= hidden_field_tag(:food, value=food.id) %></div>
+        <% #f.submit "Add"
+           oclick="$('#food_form"+food.id.to_s+"').submit()"
+        %>
+        <%= link_to 'Add to Order', "#", :onclick => "$('#food_form"+food.id.to_s+"').submit()" %>
+
+
+    <% end %>
+  </div>
 </li>

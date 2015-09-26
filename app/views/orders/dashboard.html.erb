@@ -1,44 +1,44 @@
-<% provide(:title,"Dashboard") %>
-<div class="describe"> <h1>Push on the weekday to see proper menu</h1></div>   
+<% provide(:title, "Dashboard") %>
+<div class="describe"><h1>Push on the weekday to see proper menu</h1></div>
 <div class="dashboard row offset1">
 
-<div class="weekdays offset1">
-<%= link_to  weekday_path( :weekday => 'monday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title">
-    <h4>Monday</h4>
-    </div>
+  <div class="weekdays offset1">
+    <%= link_to weekday_path(:weekday => 'monday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title">
+            <h4>Monday</h4>
+          </div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'tuesday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Tuesday</h4></div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'wednesday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Wednesday</h4></div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'thursday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Thursday</h4></div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'friday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Friday</h4></div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'saturday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Saturday</h4></div>
+        </div>
+    <% end %>
+    <%= link_to weekday_path(:weekday => 'sunday'), :method => :get do %>
+        <div class="weekday ">
+          <div class="weekday_title"><h4>Sunday</h4></div>
+        </div>
+    <% end %>
+  </div>
 </div>
-<%end%>
-<%= link_to  weekday_path( :weekday => 'tuesday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Tuesday</h4></div>
-</div>
-<%end%>
-<%= link_to  weekday_path( :weekday => 'wednesday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Wednesday</h4></div>
-</div>
-<%end%>
-<%= link_to  weekday_path( :weekday => 'thursday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Thursday</h4></div>
-</div>
-<%end%>
-<%= link_to weekday_path( :weekday => 'friday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Friday</h4></div>
-</div>
-<%end%>
-<%= link_to  weekday_path( :weekday => 'saturday'), :method => :get do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Saturday</h4></div>
-</div>
-<%end%>
-<%= link_to  weekday_path( :weekday => 'sunday'), :method => :get  do %>
-<div class="weekday ">
-<div class="weekday_title"><h4>Sunday</h4></div>
-</div>
-<%end%>
-</div>
-    </div>

@@ -1,28 +1,24 @@
+<div class="basket_title offset1"><b>Your Choice : </b></div><br>
+<div class="span3 offset1">
+  <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "first")} %>
 
-   
-      
-  
-   
-           <div class="basket_title offset1"><b>Your Choice : </b></div><br>
-         <div class="span3 offset1">
-             <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "first") } %>  
- 
-         </div><br>
-        <div class="span3">
-           <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "second") } %>
-         </div><br>
-        <div class="span3">
-             <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "drink")} %>
-         </div><br>
-         <div class="span4">
-<b>  <% if current_user.foods %>
-            TOTAL : <%= current_user.foods.sum(:price) %>
-             <% else %>
-             TOTAL : 0
-             <%end%>
-                 </b>
-             <%= link_to "Confirm Order",orders_path, :method => :post ,:class => " btn basket_submit btn-primary" %> 
-         </div><br>
+</div><br>
+<div class="span3">
+  <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "second")} %>
+</div><br>
+<div class="span3">
+  <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "drink")} %>
+</div><br>
+<div class="span4">
+  <b>
+    <% if current_user.foods %>
+        TOTAL : <%= current_user.foods.sum(:price) %>
+    <% else %>
+        TOTAL : 0
+    <% end %>
+  </b>
+  <%= link_to "Confirm Order", orders_path, :method => :post, :class => " btn basket_submit btn-primary" %>
+</div><br>
 
    
     

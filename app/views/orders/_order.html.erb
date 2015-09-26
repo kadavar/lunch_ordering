@@ -1,37 +1,37 @@
 <li class="">
-    <div class="row order_p span20">
-        <div class="span2 order_info"><%= link_to User.find_by(id: order.user_id).name , user_path(User.find_by(id: order.user_id))%></div>
-        <div class="span3 order_info"><%=order.created_at.to_s %></div>
-        <div class="span2 order_info">
-        <% food= order.foods.find_by(course: "first") %>        
-        <% if food %> 
-        <%= food.name %> | <%=food.price %>
-        <%else %>
-        none
-        <%end%></div>
-        
-        <div class="span2 order_info order_info_margin ">
-            <% food= order.foods.find_by(course: "second") %>
-            <% if food %> 
-            <%= food.name %> | <%=food.price %>
-            <%else %>
-            none
-            <%end%>
-        </div>
-        <div class="span2 order_info order_info_margin">
-            <% food= order.foods.find_by(course: "drink") %>        
-        
-         <% if food %> 
-         <%= food.name %> | <%=food.price %>
-           <%else %>
-        none
-        <%end%>
-        </div>
-        <div class="span1 order_info order_info_last">
-            <%= order.foods.sum(:price) %> 
-        </div>
-      
-    
+  <div class="row order_p span20">
+    <div class="span2 order_info"><%= link_to User.find_by(id: order.user_id).name, user_path(User.find_by(id: order.user_id)) %></div>
+    <div class="span3 order_info"><%= order.created_at.to_s %></div>
+    <div class="span2 order_info">
+      <% food= order.foods.find_by(course: "first") %>
+      <% if food %>
+          <%= food.name %> | <%= food.price %>
+      <% else %>
+          none
+      <% end %></div>
+
+    <div class="span2 order_info order_info_margin ">
+      <% food= order.foods.find_by(course: "second") %>
+      <% if food %>
+          <%= food.name %> | <%= food.price %>
+      <% else %>
+          none
+      <% end %>
     </div>
-    
+    <div class="span2 order_info order_info_margin">
+      <% food= order.foods.find_by(course: "drink") %>
+
+      <% if food %>
+          <%= food.name %> | <%= food.price %>
+      <% else %>
+          none
+      <% end %>
+    </div>
+    <div class="span1 order_info order_info_last">
+      <%= order.foods.sum(:price) %>
+    </div>
+
+
+  </div>
+
 </li>

@@ -1,9 +1,10 @@
-<%if foodf %> 
-<b><%=foodf.course.slice(0,1).capitalize + foodf.course.slice(1..-1)  %>:</b> <%= foodf.name %>, price:<%=foodf.price %>
+<% if foodf %>
+    <b><%= foodf.course.slice(0, 1).capitalize + foodf.course.slice(1..-1) %>
+      :</b> <%= foodf.name %>, price:<%= foodf.price %>
 
-<%=   link_to 'X', basket_path(Basket.find_by(food_id:foodf.id, user_id: current_user.id).id), method: :delete, :remote => true%>
-        
-   <%end%>
+    <%= link_to 'X', basket_path(Basket.find_by(food_id: foodf.id, user_id: current_user.id).id), method: :delete, :remote => true %>
+
+<% end %>
    
 
              

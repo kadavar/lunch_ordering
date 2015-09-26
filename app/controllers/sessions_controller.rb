@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-     def new
+  def new
   end
 
   def create
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     end
   end
 
- def destroy
+  def destroy
     sign_out
     redirect_to root_url
   end

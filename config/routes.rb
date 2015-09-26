@@ -1,39 +1,39 @@
 Rails.application.routes.draw do
- 
-    resources :menus do
-        post :addFood, :on => :member
-        post :deleteFood, :on => :member
-end
 
-    resources :users
-    resources :baskets
-    resources :menus
-    resources :foods
-    resources :orders 
-    resources :sessions, only: [:new, :create, :destroy,:update]
-    
-  root  'static_pages#home'
-  
-  match '/help',    to: 'static_pages#help',    via: 'get'
-  match '/about',   to: 'static_pages#about',   via: 'get'
+  resources :menus do
+    post :addFood, :on => :member
+    post :deleteFood, :on => :member
+  end
+
+  resources :users
+  resources :baskets
+  resources :menus
+  resources :foods
+  resources :orders
+  resources :sessions, only: [:new, :create, :destroy, :update]
+
+  root 'static_pages#home'
+
+  match '/help', to: 'static_pages#help', via: 'get'
+  match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
-  match '/signup',  to: 'users#new',            via: 'get'
-    
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-    match '/foods',  to: 'foods#index',            via: 'get'
-    match '/newfood',    to: 'foods#new',    via: 'get'
-    match '/tomenu',    to: 'menus#addFood',    via: 'post'
-    match '/frommenu',    to: 'menus#deleteFood',    via: 'post'
-    match '/dashboard',    to: 'orders#dashboard',    via: 'get'
-    match '/weekday',    to: 'orders#weekday',    via: 'get'
-    match '/tobasket',    to: 'baskets#create',    via: 'post'
-    match '/days',    to: 'orders#show',    via: 'get'
-    match '/search',    to: 'orders#search  ',    via: 'get'
-    
-    match '/getJsons',    to: 'orders#getJsons',    via: 'get'
-    
-    
+  match '/signup', to: 'users#new', via: 'get'
+
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/foods', to: 'foods#index', via: 'get'
+  match '/newfood', to: 'foods#new', via: 'get'
+  match '/tomenu', to: 'menus#addFood', via: 'post'
+  match '/frommenu', to: 'menus#deleteFood', via: 'post'
+  match '/dashboard', to: 'orders#dashboard', via: 'get'
+  match '/weekday', to: 'orders#weekday', via: 'get'
+  match '/tobasket', to: 'baskets#create', via: 'post'
+  match '/days', to: 'orders#show', via: 'get'
+  match '/search', to: 'orders#search  ', via: 'get'
+
+  match '/getJsons', to: 'orders#getJsons', via: 'get'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
