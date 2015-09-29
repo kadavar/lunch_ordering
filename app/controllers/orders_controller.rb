@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 
   def weekday
     @foods=Menu.todayFoods(params[:weekday])
-    @weekday=Date.today.strftime("%A")
+    @weekday=params[:weekday]
   end
 
   def create

@@ -5,14 +5,15 @@ describe "Foods page" do
   subject { page }
 
   before do
-    u=FactoryGirl.create(:user)
-    sign_in u
-    create_admin u
+    @u=FactoryGirl.create(:user)
+    sign_in @u
+    create_admin @u
     visit newfood_path
   end
 
 
   after do
+    click_link "Sign out"
     User.all.each do |us|
       us.destroy
     end

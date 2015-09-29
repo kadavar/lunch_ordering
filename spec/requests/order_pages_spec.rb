@@ -13,23 +13,32 @@ describe "Orders Pages" do
   end
 
   shared_examples "non_signed_user" do |target|
-    it { should_not have_title(target) }
-    it { should have_title("") }
-  end
+    describe "visit #{target} page" do
+      it { should_not have_title(title) }
+      it { should have_title("") }
+      it { should have_link("Sign in") }
 
-
-  describe "for non-signed users" do
-    before { visit dashboard_path }
-    it_should_behave_like "non_signed_user", "Dashboard"
-  end
-
-  describe "for signed users" do
-    before do
-      sign_in @user
     end
 
-    describe "Dashboard" do
-      before { visit dashboard_path }
+  end
+
+
+  describe "Dashboard page" do
+      describe "visit as non signed user" do
+          before {
+          visit dashboard_path}
+          it_should_behave_like "non_signed_user", "Dashboard" do
+            let(:title) {"Dashboard"}
+          end
+      end
+
+      describe "for signed users" do
+      before {
+        sign_in @user
+        visit dashboard_path }
+      after {
+        click_on "Sign out"
+      }
       it { should have_title("Dashboard") }
       it { should have_link("Monday") }
       it { should have_link("Tuesday") }
@@ -38,101 +47,112 @@ describe "Orders Pages" do
       it { should have_link("Friday") }
       it { should have_link("Saturday") }
       it { should have_link("Sunday") }
-    end
 
-    describe "Weekday" do
-      let (:weekday) { Date.today.strftime("%A") }
-      describe "Weekday menu " do
+   describe "Weekday page" do
         before do
           todayMenu
           visit dashboard_path
-          click_on weekday
-
+          @today=Date.today.strftime("%A")
+          click_on @today
         end
+
         let(:food) { Food.last }
         it { should have_title("Menu") }
-        it { should have_content("Menu for "+weekday) }
+        it { should have_content("Menu for "+@today.downcase) }
         it { should have_link("Add to Order") }
         it { should have_link("Confirm Order") }
 
-        describe "add to basket" do
+     describe "Confirm empty order" do
+       before {click_link "Confirm"}
+       it {should have_title("Dashboard")}
+       it {should have_selector("div.alert-error") }
+     end
 
-          before { click_link "Add to Order"
-          visit dashboard_path
-          click_on weekday }
-
-
-          it { expect(Basket.all.count).to eq 0 }
+     describe "Create order" do
+       before do
+         visit dashboard_path
+         click_on @today
+       end
+        describe "add item to basket" do
+         before {click_on "Add to Order"
+         visit dashboard_path
+         click_on @today
+         }
+         it {should have_content("Your Choice")}
+         it {should have_content("foodfirst")}
+         it {expect(Basket.all.count).to eq 2}
 
         end
+     end
+
 
 
       end
+      end
 
+  end
+
+
+  describe "Orders Page" do
+    describe "visit as non signed user" do
+      before {
+       visit allorders_path}
+      it_should_behave_like "non_signed_user", "Orders" do
+        let(:title) {"Dates"}
+      end
+    end
+    describe "User is not admin" do
+      before {
+        sign_in(@user)
+        not_admin(@user)
+        visit allorders_path }
+
+      it { should have_title("Dashboard") }
     end
 
-    describe "Page  Orders" do
-
-      describe "User is not admin" do
-        before {
-          not_admin(@user)
-          visit allorders_path }
-
-        it { should have_title("Dashboard") }
+    describe "User is admin" do
+      before {
+        sign_in(@user)
+        create_admin(@user)
+        visit allorders_path
+      }
+      it { should have_title("Dates") }
+      describe "Have no orders" do
+        it {should have_content("No Orders")}
+        it {should have_button("Submit")}
       end
+      describe "Have orders" do
+      before {
+        prepareOrders(@user)
+        visit allorders_path}
+      after {Order.delete_all}
+      it_should_behave_like "haveorders"
 
-      describe "User is admin" do
-        before {
-          create_admin(@user)
+
+      describe "Yesterday orders" do
+        before{
+          yesterdayOrders
           visit allorders_path
         }
-        it { should have_title("Dates") }
-
-        describe "No orders" do
-          it { should have_content("No Orders") }
-        end
-
-        describe "Have orders" do
-          before do
-            prepareOrders(@user)
+        describe "Not find yestarday orders " do
+          it {should have_content("No Orders")}
+          end
+        describe "Find yestarday orders " do
+          before {
             visit allorders_path
-          end
-          after { Order.delete_all }
-
+            fill_in "search", with: (Date.today-1).to_s
+            click_on "Submit"
+          }
           it_should_behave_like "haveorders"
-
-
-          describe "Yesterday orders" do
-            before do
-              yesterdayOrders
-            end
-            describe "not fined at today page" do
-              before do
-                visit allorders_path
-              end
-              it { should have_content("No Orders") }
-              it { should have_button("Submit") }
-            end
-
-            describe "find yesterday orders " do
-              before do
-                fill_in "search", with: Date.yesterday.to_s
-                click_on "Submit"
-              end
-
-              it_should_behave_like "haveorders"
-
-            end
-
-          end
         end
-
 
       end
 
+      end
 
     end
   end
+
+
+
 end
-
-
