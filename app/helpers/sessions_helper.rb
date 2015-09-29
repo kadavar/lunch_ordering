@@ -31,6 +31,12 @@ module SessionsHelper
       flash[:notice]='Please sign up  '
     end
   end
+  def admin_check
+    if !current_user.roles.find_by(role:"admin")
+      redirect_to root_path
+
+    end
+  end
 
   def sign_out
     current_user.update_attribute(:remember_token,

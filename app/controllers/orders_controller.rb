@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :sign_check
+  before_action :admin_check ,only: :show
 
   def new
   end

@@ -2,11 +2,11 @@
 <div class="row offset1 date_infos">
 
   <div class="form_search span4">
-    <%= form_tag days_path, :method => 'get' do %>
+    <%= form_tag allorders_path, :method => 'get' do %>
         <div class="total_cost date_info">
           <h4>Order for </h4>
           <%= date_field_tag :search, params[:search], :value => @date %>
-          <%= submit_tag "Sumbit", :name => nil %>
+          <%= submit_tag "Submit", :name => nil %>
 
           <h4>Total : <%= @total %></h4>
 
@@ -21,8 +21,9 @@
 
 </div>
 
+<% if @today_orders.count > 0 %>
 
-<div class="row"><h1>Orders :</h1></div>
+<div class="row"><h1>Orders:</h1></div>
 <div class="row offset1">
 
 
@@ -47,7 +48,7 @@
       <br></b>
   </div>
   <br>
-  <% if @today_orders.count > 0 %>
+
       <ul class="foods orders_ul">
 
         <% @today_orders.each do |o| %>
@@ -55,13 +56,16 @@
 
         <% end %>
       </ul>
-      <%= will_paginate @today_orders %>
+  <br>
+
+
   <% else %>
       <br>
 
       <h1>No Orders</h1>
-  <% end %>
 
+  <% end %>
+<div class="row"><%= will_paginate @today_orders %></div>
 </div>
   
 

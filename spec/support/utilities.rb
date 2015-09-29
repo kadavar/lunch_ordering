@@ -12,12 +12,18 @@ def sign_in(user, options={})
     fill_in "Password", with: user.password
     click_button "Sign in"
   end
+end
 
 
   def create_admin(user)
     Role.create!(role: "admin")
     Role.create!(role: "user")
     user.roles = Role.all
+  end
+
+  def not_admin(user)
+
+    user.roles = Role.where(role:"user")
   end
 
 
@@ -27,12 +33,22 @@ def sign_in(user, options={})
 
   end
 
-  def prepareOrder(u)
-    @o= Order.create(user_id: u.id)
-    @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "first"))
-    @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "second"))
-    @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "drink"))
+  def prepareOrders(u)
+    32.times do
+      @o= Order.create(user_id: u.id)
+      @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "first"))
+      @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "second"))
+      @o.foods.push(Food.new(name: "foodfirst", price: 199, course: "drink"))
+    end
     @o
   end
 
-end
+  def yesterdayOrders
+    d=DateTime.now-1
+     Order.find_each do |o|
+       o.update_attributes(created_at:d)
+     end
+  end
+
+
+

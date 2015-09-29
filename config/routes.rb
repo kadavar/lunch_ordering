@@ -28,10 +28,10 @@ Rails.application.routes.draw do
   match '/dashboard', to: 'orders#dashboard', via: 'get'
   match '/weekday', to: 'orders#weekday', via: 'get'
   match '/tobasket', to: 'baskets#create', via: 'post'
-  match '/days', to: 'orders#show', via: 'get'
+  match '/allorders', to: 'orders#show', via: 'get'
   match '/search', to: 'orders#search  ', via: 'get'
 
-  match '/getJsons', to: 'orders#getJsons', via: 'get'
+  match '/getOrders', to: 'orders#getJsons', via: 'get'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

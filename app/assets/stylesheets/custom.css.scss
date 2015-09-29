@@ -1,14 +1,5 @@
 @import "bootstrap";
 
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../assets/glyphicons-halflings-regular.eot');
-  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-  url('../assets/glyphicons-halflings-regular.woff') format('woff'),
-  url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
-  url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-
 $grayMediumLight: #eaeaea;
 
 html {
@@ -213,13 +204,11 @@ input {
 
 #show_basket {
   position: fixed;
-  background-color: #F7F5F5;
   margin-top: -60px;
   right: 2.6em;
   font-size: 3.5em;
-  border: 1px solid;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px
+
+
 }
 
 #basket {
@@ -228,7 +217,7 @@ input {
   position: fixed;
   background-color: #FAFAF4;
   margin-top: -60px;
-  right: 10em;
+  right: 8em;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -274,6 +263,7 @@ input {
 .orders_ul {
   li {
     list-style-type: none;
+    height: 1.5vw;
   }
 }
 

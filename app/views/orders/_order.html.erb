@@ -1,4 +1,4 @@
-<li class="">
+<li class="order_li">
   <div class="row order_p span20">
     <div class="span2 order_info"><%= link_to User.find_by(id: order.user_id).name, user_path(User.find_by(id: order.user_id)) %></div>
     <div class="span3 order_info"><%= order.created_at.to_s %></div>

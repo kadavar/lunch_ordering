@@ -1,5 +1,6 @@
-<div class="basket_title offset1"><b>Your Choice : </b></div><br>
-<div class="span3 offset1">
+<div class="basket_title offset1"><b>Your Choice : </b></div>
+<br>
+<div class="span3">
   <%= render :partial => "baskets/choose", :locals => {:foodf => current_user.foods.find_by(course: "first")} %>
 
 </div><br>
