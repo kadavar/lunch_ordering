@@ -15,14 +15,16 @@ class Food < ActiveRecord::Base
 
 
   def self.allFoods(page, page_second, page_drink)
-    all=Food.all
     @food=Hash.new
-
-    @food[:first]= all.where(course: "first").paginate(page: page)
-    @food[:second] =all.where(course: "second").paginate(page: page_second)
-    @food[:drink]= all.where(course: "drink").paginate(page: page_drink)
+    @food[:first]= Food.Findbycourse("first",page)
+    @food[:second] = Food.Findbycourse("second",page_second)
+    @food[:drink]= Food.Findbycourse("second",page_drink)
     @food
 
+  end
+
+  def self.Findbycourse(course,page)
+    Food.all.where(course: course).paginate(page: page)
   end
 
   def self.addFood(food)
@@ -32,13 +34,10 @@ class Food < ActiveRecord::Base
 
   def self.otherFood(page, page_second, page_drink)
     menufood=Menu.todayMenu.foods
-    allFood=Food.all
+    all=Food.all
     @food=Hash.new
-
     @food[:first]=(all.where(course: "first")-menufood.where(course: "first")).paginate(page: page)
-
     @food[:second]=(all.where(course: "second")-menufood.where(course: "second")).paginate(page: page_second)
-
     @food[:drink]=(all.where(course: "drink")-menufood.where(course: "drink")).paginate(page: page_drink)
     @food
 
