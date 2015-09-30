@@ -2,9 +2,9 @@ class BasketsController < ApplicationController
 
 
   def create
-
-    if (Basket.find_by(user_id: current_user.id, food_course: Food.find(params[:food]).course))
-      Basket.find_by(user_id: current_user.id, food_course: Food.find(params[:food]).course).destroy
+      already_exist=Basket.find_by(user_id: current_user.id, food_course: Food.find(params[:food]).course)
+    if (already_exist)
+      already_exist.destroy
 
     end
     Basket.create(food_id: params[:food], user_id: current_user.id, food_course: Food.find(params[:food]).course)
