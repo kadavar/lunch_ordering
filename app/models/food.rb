@@ -32,13 +32,16 @@ class Food < ActiveRecord::Base
 
   end
 
+def self.otherByCourse(course,page)
+  (Food.all.where(course: course)-Menu.todayMenu.foods.where(course: course)).paginate(page: page)
+end
+
   def self.otherFood(page, page_second, page_drink)
-    menufood=Menu.todayMenu.foods
-    all=Food.all
+
     @food=Hash.new
-    @food[:first]=(all.where(course: "first")-menufood.where(course: "first")).paginate(page: page)
-    @food[:second]=(all.where(course: "second")-menufood.where(course: "second")).paginate(page: page_second)
-    @food[:drink]=(all.where(course: "drink")-menufood.where(course: "drink")).paginate(page: page_drink)
+    @food[:first]=otherByCourse("first",page)
+    @food[:second]=otherByCourse("second",page_second)
+    @food[:drink]=otherByCourse("drink",page_drink)
     @food
 
   end
