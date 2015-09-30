@@ -11,10 +11,6 @@ FactoryGirl.define do
     sequence(:price) { |n| "32#{n}" }
     course "first"
   end
-  factory :menu do
-    sequence(:name) { |n| "Food #{n}" }
-    sequence(:price) { |n| "32#{n}" }
-    course "first"
-  end
+
 
 end

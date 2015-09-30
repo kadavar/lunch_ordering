@@ -71,18 +71,18 @@ describe "Orders Pages" do
      describe "Create order" do
        before do
          visit dashboard_path
+         prepareBasket(@user)
          click_on @today
-       end
-        describe "add item to basket" do
-         before {click_on "Add to Order"
-         visit dashboard_path
-         click_on @today
-         }
-         it {should have_content("Your Choice")}
-         it {should have_content("foodfirst")}
-         it {expect(Basket.all.count).to eq 2}
 
-        end
+       end
+
+       describe "click Confirm Order " do
+         subject { -> { click_on "Confirm Order" } }
+         it { should change(Order, :count) }
+           it { should change(Basket, :count) }
+       end
+
+
      end
 
 
