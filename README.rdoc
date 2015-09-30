@@ -1,4 +1,5 @@
 RUBY ON RAILS APPLICATION 
 LUNCH ORDERING
 https://agile-caverns-3561.herokuapp.com/
-<a href="https://codeclimate.com/repos/560c5a90e30ba00b9600a025/feed"><img src="https://codeclimate.com/repos/560c5a90e30ba00b9600a025/badges/c4c5e1a8d8c7f381f3ae/gpa.svg" /></a>
+Today Orders.json => /getOrders
+{<img src="https://codeclimate.com/repos/560c5a90e30ba00b9600a025/badges/c4c5e1a8d8c7f381f3ae/gpa.svg" />}[https://codeclimate.com/repos/560c5a90e30ba00b9600a025/feed]
