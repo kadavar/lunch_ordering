@@ -12,7 +12,7 @@
         <%= f.text_field :price %>
 
         <%= f.label :food_type %>
-        <%= f.select :course, options_for_select([['First course', 'first'], ['Second course', 'second'], ['Drink', 'drink']], @food.course) %>
+        <%= f.select :course, options_for_post_food(@food.course) %>
         <%= f.submit "Update Food", class: "btn btn-large btn-primary" %>
     <% end %>
 

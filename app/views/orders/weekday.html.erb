@@ -15,7 +15,7 @@
           <br></div>
         <ul class="foods foods_first ul_today">
           <% @foods[:first].each do |f| %>
-              <%= render :partial => "food", :locals => {:food => f} %>
+              <%= render "food", :food => f %>
           <% end %>
         </ul>
 
@@ -30,7 +30,7 @@
           <br></div>
         <ul class="foods foods_second ul_today">
           <% @foods[:second].each do |f| %>
-              <%= render :partial => "food", :locals => {:food => f} %>
+              <%= render "food", :food => f %>
           <% end %>
 
         </ul>
@@ -47,7 +47,7 @@
 
         <ul class="foods foods_drink ul_today">
           <% @foods[:drink].each do |f| %>
-              <%= render :partial => "food", :locals => {:food => f} %>
+              <%= render  "food", :food => f %>
           <% end %>
 
         </ul>

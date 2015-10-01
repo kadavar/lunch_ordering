@@ -13,9 +13,7 @@ class Order < ActiveRecord::Base
     d
   end
 
-  def self.OrderPrice
 
-  end
 
   def self.todayOrders(search, page)
     if search

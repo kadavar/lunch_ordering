@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924024034) do
+ActiveRecord::Schema.define(version: 20151001102405) do
 
   create_table "baskets", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "food_id"
-    t.string "food_course"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "food_id"
+    t.string   "food_course"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "baskets", ["food_id", "user_id", "food_course"], name: "index_baskets_on_food_id_and_user_id_and_food_course", unique: true
@@ -26,17 +26,17 @@ ActiveRecord::Schema.define(version: 20150924024034) do
   add_index "baskets", ["user_id", "food_course"], name: "index_baskets_on_user_id_and_food_course", unique: true
 
   create_table "foods", force: :cascade do |t|
-    t.string "name"
-    t.integer "price"
-    t.string "course"
+    t.string   "name"
+    t.decimal  "price"
+    t.string   "course"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "in_menu", default: false
+    t.boolean  "in_menu",    default: false
   end
 
   create_table "menu_foods", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "food_id"
+    t.integer  "menu_id"
+    t.integer  "food_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150924024034) do
   add_index "menu_foods", ["food_id", "menu_id"], name: "index_menu_foods_on_food_id_and_menu_id", unique: true
 
   create_table "menus", force: :cascade do |t|
-    t.string "weekday"
+    t.string   "weekday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,11 +54,16 @@ ActiveRecord::Schema.define(version: 20150924024034) do
     t.integer "food_id"
   end
 
+  add_index "order_foods", ["food_id"], name: "index_order_foods_on_food_id"
+  add_index "order_foods", ["order_id"], name: "index_order_foods_on_order_id"
+
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string "role"
@@ -76,12 +81,12 @@ ActiveRecord::Schema.define(version: 20150924024034) do
   add_index "user_roles", ["user_id"], name: "index_users_roles_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "remember_token"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

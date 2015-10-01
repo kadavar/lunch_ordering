@@ -14,18 +14,8 @@ class Food < ActiveRecord::Base
   has_many :baskets, dependent: :destroy
 
 
-  def self.allFoods(page, page_second, page_drink)
-    @food=Hash.new
-    @food[:first]= Food.Findbycourse("first",page)
-    @food[:second] = Food.Findbycourse("second",page_second)
-    @food[:drink]= Food.Findbycourse("second",page_drink)
-    @food
 
-  end
 
-  def self.Findbycourse(course,page)
-    Food.all.where(course: course).paginate(page: page)
-  end
 
   def self.addFood(food)
     Menu.todayMenu.foods.push(food)

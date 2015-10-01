@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :baskets
-  resources :menus
+  resources :baskets , only: [:create, :destroy, :update]
+  resources :menus , only: [ :update]
   resources :foods
   resources :orders
   resources :sessions, only: [:new, :create, :destroy, :update]
