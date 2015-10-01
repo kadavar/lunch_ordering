@@ -63,8 +63,4 @@ module SessionsHelper
     end
   end
 
-
-  def MenuFoods(weekday)
-    @foods=Menu.find_by(weekday: weekday).foods
-  end
 end

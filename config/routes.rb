@@ -1,16 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :menus do
-    post :addFood, :on => :member
-    post :deleteFood, :on => :member
-  end
 
   resources :users
-  resources :baskets , only: [:create, :destroy, :update]
-  resources :menus , only: [ :update]
+  resources :baskets , only: [:create, :destroy ]
+  resources :menus , only: []
   resources :foods
-  resources :orders
-  resources :sessions, only: [:new, :create, :destroy, :update]
+  resources :orders ,only: [:new, :create, :show]
+  resources :sessions, only: [:new, :create, :destroy, ]
 
   root 'static_pages#home'
 
