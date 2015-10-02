@@ -12,7 +12,7 @@ describe "User pages" do
       u=FactoryGirl.create(:user)
       sign_in u
       FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+
       create_admin(u)
       visit users_path
     end
@@ -23,6 +23,9 @@ describe "User pages" do
     describe "delete links if admin" do
 
       it { should have_link('delete') }
+       it "delete user" do
+           expect { click_link 'delete' }.to change(User, :count).by(-1)
+         end
     end
 
     describe "delete links if user" do
