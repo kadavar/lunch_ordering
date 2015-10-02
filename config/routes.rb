@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   resources :users
   resources :baskets , only: [:create, :destroy ]
   resources :menus , only: []
