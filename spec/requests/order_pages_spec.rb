@@ -24,15 +24,15 @@ describe "Orders Pages" do
 
 
   describe "Dashboard page" do
-      describe "visit as non signed user" do
-          before {
-          visit dashboard_path}
-          it_should_behave_like "non_signed_user", "Dashboard" do
-            let(:title) {"Dashboard"}
-          end
+    describe "visit as non signed user" do
+      before {
+        visit dashboard_path }
+      it_should_behave_like "non_signed_user", "Dashboard" do
+        let(:title) { "Dashboard" }
       end
+    end
 
-      describe "for signed users" do
+    describe "for signed users" do
       before {
         sign_in @user
         visit dashboard_path }
@@ -48,7 +48,7 @@ describe "Orders Pages" do
       it { should have_link("Saturday") }
       it { should have_link("Sunday") }
 
-   describe "Weekday page" do
+      describe "Weekday page" do
         before do
           todayMenu
           visit dashboard_path
@@ -62,33 +62,32 @@ describe "Orders Pages" do
         it { should have_link("Add to Order") }
         it { should have_link("Confirm Order") }
 
-     describe "Confirm empty order" do
-       before {click_link "Confirm"}
-       it {should have_title("Dashboard")}
-       it {should have_selector("div.alert-error") }
-     end
+        describe "Confirm empty order" do
+          before { click_link "Confirm" }
+          it { should have_title("Dashboard") }
+          it { should have_selector("div.alert-error") }
+        end
 
-     describe "Create order" do
-       before do
-         visit dashboard_path
-         prepareBasket(@user)
-         click_on @today
+        describe "Create order" do
+          before do
+            visit dashboard_path
+            prepareBasket(@user)
+            click_on @today
 
-       end
+          end
 
-       describe "click Confirm Order " do
-         subject { -> { click_on "Confirm Order" } }
-         it { should change(Order, :count) }
-           it { should change(Basket, :count) }
-       end
+          describe "click Confirm Order " do
+            subject { -> { click_on "Confirm Order" } }
+            it { should change(Order, :count) }
+            it { should change(Basket, :count) }
+          end
 
 
-     end
-
+        end
 
 
       end
-      end
+    end
 
   end
 
@@ -96,9 +95,9 @@ describe "Orders Pages" do
   describe "Orders Page" do
     describe "visit as non signed user" do
       before {
-       visit allorders_path}
+        visit allorders_path }
       it_should_behave_like "non_signed_user", "Orders" do
-        let(:title) {"Dates"}
+        let(:title) { "Dates" }
       end
     end
     describe "User is not admin" do
@@ -118,41 +117,54 @@ describe "Orders Pages" do
       }
       it { should have_title("Dates") }
       describe "Have no orders" do
-        it {should have_content("No Orders")}
-        it {should have_button("Submit")}
+        it { should have_content("No Orders") }
+        it { should have_button("Submit") }
       end
       describe "Have orders" do
-      before {
-        prepareOrders(@user)
-        visit allorders_path}
-      after {Order.delete_all}
-      it_should_behave_like "haveorders"
+        before {
+          prepareOrders(@user)
+          visit allorders_path }
+        after { Order.delete_all }
+        it_should_behave_like "haveorders"
 
 
-      describe "Yesterday orders" do
-        before{
-          yesterdayOrders
-          visit allorders_path
-        }
-        describe "Not find yestarday orders " do
-          it {should have_content("No Orders")}
-          end
-        describe "Find yestarday orders " do
+        describe "Yesterday orders" do
           before {
+            yesterdayOrders
             visit allorders_path
-            fill_in "search", with: (Date.today-1).to_s
-            click_on "Submit"
           }
-          it_should_behave_like "haveorders"
-        end
+          describe "Not find yestarday orders " do
+            it { should have_content("No Orders") }
+          end
+          describe "Find yestarday orders " do
+            before {
+              visit allorders_path
+              fill_in "search", with: (Date.today-1).to_s
+              click_on "Submit"
+            }
+            it_should_behave_like "haveorders"
+          end
 
-      end
+        end
 
       end
 
     end
   end
 
+  describe "render getOrders.json" do
+    before {
+      Order.delete_all
+      @order=Order.create(user_id: @user.id)
+      visit getOrders_path
+    }
 
+
+    it { should have_content( "order" ) }
+    it "includes orders" do
+      @order_json = [{"order" => {"id" => @order.id, "user_id" => @user.id, "created_at" => @order.created_at, "updated_at" => @order.updated_at}}].to_json
+      Order.getJson.should be_json_eql(@order_json)
+    end
+  end
 
 end

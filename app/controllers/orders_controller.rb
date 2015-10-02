@@ -5,8 +5,6 @@ class OrdersController < ApplicationController
   def new
   end
 
-
-
   def getJsons
     render :json => Order.getJson
   end

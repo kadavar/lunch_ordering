@@ -141,9 +141,13 @@ describe "Foods page" do
   end
   describe "edit " do
     before do
-      f=FactoryGirl.create(:food)
-      visit edit_food_path(f)
+      @f=FactoryGirl.create(:food)
+      visit foods_path
     end
+    it {should have_title ("Today Menu")}
+    it {should have_link (@f.name)}
+    describe "click on food name " do
+       before {click_on @f.name}
     it { should have_title('Edit Food') }
     it { should have_selector('input') }
     it { should have_content('Update food') }
@@ -175,7 +179,7 @@ describe "Foods page" do
 
       end
     end
-
+   end
   end
 
 end

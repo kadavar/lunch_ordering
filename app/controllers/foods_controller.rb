@@ -4,11 +4,6 @@ class FoodsController < ApplicationController
   before_action :sign_check
 
   def new
-
-    unless user_is_admin?
-      redirect_to root_path
-    end
-
   end
 
   def create
