@@ -336,8 +336,8 @@
         null,
         1,
         170,
-        10,
-        10,
+        9,
+        9,
         null,
         null,
         1,
@@ -491,7 +491,7 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -659,7 +659,7 @@
       ],
       "/home/vodoo/sites/lunch_ordering/app/models/user.rb": [
         1,
-        277,
+        278,
         1,
         1,
         1,
@@ -677,7 +677,7 @@
         1,
         null,
         1,
-        271,
+        272,
         null,
         null,
         1,
@@ -691,7 +691,7 @@
         null,
         null,
         1,
-        4294,
+        4295,
         null,
         null,
         1,
@@ -850,6 +850,6 @@
         null
       ]
     },
-    "timestamp": 1443831675
+    "timestamp": 1443838447
   }
 }
