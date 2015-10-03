@@ -13,15 +13,6 @@ class Food < ActiveRecord::Base
   has_many :users, through: :baskets, source: :user
   has_many :baskets, dependent: :destroy
 
-
-
-
-
-  def self.addFood(food)
-    Menu.todayMenu.foods.push(food)
-
-  end
-
 def self.otherByCourse(course,page)
   (Food.all.where(course: course)-Menu.todayMenu.foods.where(course: course)).paginate(page: page)
 end

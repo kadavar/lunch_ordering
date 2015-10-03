@@ -5,7 +5,7 @@ describe "Orders Pages" do
   before { @user=FactoryGirl.create(:user) }
   subject { page }
 
-  shared_examples "haveorders" do
+  shared_examples "contain_orders" do
     it { should have_content("Orders:") }
     it { should have_selector('ul.orders_ul') }
     it { should have_selector('div.pagination') }
@@ -68,7 +68,7 @@ describe "Orders Pages" do
           it { should have_selector("div.alert-error") }
         end
 
-        describe "Create order" do
+        describe "Create not empty order" do
           before do
             visit dashboard_path
             prepareBasket(@user)
@@ -116,24 +116,24 @@ describe "Orders Pages" do
         visit allorders_path
       }
       it { should have_title("Dates") }
-      describe "Have no orders" do
+      describe "Doesn`t contain orders" do
         it { should have_content("No Orders") }
         it { should have_button("Submit") }
       end
-      describe "Have orders" do
+      describe "Contain orders" do
         before {
           prepareOrders(@user)
           visit allorders_path }
         after { Order.delete_all }
-        it_should_behave_like "haveorders"
+        it_should_behave_like "contain_orders"
 
 
-        describe "Yesterday orders" do
+        describe "Orders page" do
           before {
             yesterdayOrders
             visit allorders_path
           }
-          describe "Not find yestarday orders " do
+          describe  "Doesn`t contain yestarday orders " do
             it { should have_content("No Orders") }
           end
           describe "Find yestarday orders " do
@@ -142,7 +142,7 @@ describe "Orders Pages" do
               fill_in "search", with: (Date.today-1).to_s
               click_on "Submit"
             }
-            it_should_behave_like "haveorders"
+            it_should_behave_like "contain_orders"
           end
 
         end
@@ -158,8 +158,6 @@ describe "Orders Pages" do
       @order=Order.create(user_id: @user.id)
       visit getOrders_path
     }
-
-
     it { should have_content( "order" ) }
     it "includes orders" do
       @order_json = [{"order" => {"id" => @order.id, "user_id" => @user.id, "created_at" => @order.created_at, "updated_at" => @order.updated_at}}].to_json

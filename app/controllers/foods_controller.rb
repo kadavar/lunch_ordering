@@ -10,7 +10,7 @@ class FoodsController < ApplicationController
     @food=Food.new(food_params)
     if @food.save
       flash[:succes]= "Food added"
-      Food.addFood(@food)
+      Menu.todayMenu.foods.push(@food)
       redirect_to foods_path
     else
       flash[:error]="Error"

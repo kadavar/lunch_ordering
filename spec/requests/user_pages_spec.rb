@@ -2,17 +2,12 @@ require 'spec_helper'
 require 'rails_helper'
 
 describe "User pages" do
-
   subject { page }
-
-
-  describe "index" do
+  describe "index page" do
     before do
-
       u=FactoryGirl.create(:user)
       sign_in u
       FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-
       create_admin(u)
       visit users_path
     end
@@ -20,7 +15,7 @@ describe "User pages" do
     it { should have_title('All users') }
     it { should have_content('All users') }
 
-    describe "delete links if admin" do
+    describe "have links delete if admin" do
 
       it { should have_link('delete') }
        it "delete user" do
@@ -28,7 +23,7 @@ describe "User pages" do
          end
     end
 
-    describe "delete links if user" do
+    describe "doesn`t have delete links if user" do
       before do
         sign_in FactoryGirl.create(:user, name: "Bob", email: "bosb@example.com")
         visit users_path
@@ -114,19 +109,16 @@ describe "User pages" do
       sign_in user
       visit edit_user_path(user)
     end
+    it { should have_content("Update your profile") }
+    it { should have_title("Edit user") }
+    it { should have_link('change', href: 'http://gravatar.com/emails') }
 
-    describe "page" do
-      it { should have_content("Update your profile") }
-      it { should have_title("Edit user") }
-      it { should have_link('change', href: 'http://gravatar.com/emails') }
-    end
-
-    describe "with invalid information" do
+    describe "update with invalid information" do
       before { click_button "Save changes" }
 
       it { should have_content('error') }
     end
-    describe "with valid information" do
+    describe "update with valid information" do
       let(:new_name) { "New Name" }
       let(:new_email) { "new@example.com" }
       before do

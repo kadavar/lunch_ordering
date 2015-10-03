@@ -5,7 +5,7 @@ describe "Authentication" do
 
   subject { page }
 
-  describe "signin page" do
+  describe "Sign in" do
     before { visit signin_path }
     describe "with invalid information" do
       before { click_button "Sign in" }

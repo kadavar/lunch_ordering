@@ -2,15 +2,15 @@ require 'rails_helper'
 require 'spec_helper'
 
 
-#RSpec.configure {|c| c.include SessionsHelper }
+
 RSpec.describe BasketsController, :type => :controller do
 
   describe "basket" do
 
     User.delete_all
 
-    it "should increment the basket count" do
-
+    it "::create" do
+ #     it_should_behave_like "non_"
       @user=FactoryGirl.create(:user)
       @food=FactoryGirl.create(:food)
       sign_in(@user, no_capybara: true)
@@ -22,7 +22,7 @@ RSpec.describe BasketsController, :type => :controller do
       end.not_to change(Basket, :count)
 
     end
-    it "destroy basket" do
+    it "::destroy" do
       @user=FactoryGirl.create(:user)
       @food=FactoryGirl.create(:food)
       sign_in(@user, no_capybara: true)

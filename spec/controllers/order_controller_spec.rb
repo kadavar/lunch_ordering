@@ -3,9 +3,9 @@ require 'spec_helper'
 
 RSpec.describe OrdersController, :type => :controller do
 
-  describe "get order response" do
+  describe "Order Controller" do
 
-    it "get orders.json" do
+    it "::getOrders" do
       @user=FactoryGirl.create(:user)
       sign_in(@user,no_capybara: true)
       get :getJsons, :format => :json
