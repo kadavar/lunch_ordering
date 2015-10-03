@@ -3,14 +3,15 @@ require 'spec_helper'
 
 RSpec.describe OrdersController, :type => :controller do
 
-  describe "Order Controller" do
-
-    it "::getOrders" do
+  describe "::getOrders" do
+    before do
       @user=FactoryGirl.create(:user)
-      sign_in(@user,no_capybara: true)
-      get :getJsons, :format => :json
-      response.should be_success
-      User.delete_all
+      sign_in(@user, no_capybara: true)
+    end
+    after { User.delete_all }
+
+    context "when succes response" do
+      it { expect(get :getJsons, :format => :json).to be_success }
     end
   end
 end
