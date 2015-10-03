@@ -2,6 +2,7 @@ class BasketsController < ApplicationController
 
 
   def create
+
     already_exist=Basket.find_by(user_id: current_user.id, food_course: Food.find(params[:food]).course)
     if (already_exist)
       already_exist.destroy

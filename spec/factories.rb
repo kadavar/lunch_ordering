@@ -7,8 +7,8 @@ FactoryGirl.define do
   end
 
   factory :food do
-    name{ "Food 1" }
-     price { "32" }
+    sequence(:name) { |n| "Food #{n}" }
+    sequence(:price) { |n| "32#{n}" }
     course "first"
   end
 
