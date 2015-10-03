@@ -139,6 +139,14 @@ describe "Foods page" do
     end
 
   end
+  describe "show" do
+    before {
+      @f=FactoryGirl.create(:food)
+      visit food_path(@f)
+    }
+    it {should have_content(@f.name)}
+  end
+
   describe "edit " do
     before do
       @f=FactoryGirl.create(:food)
