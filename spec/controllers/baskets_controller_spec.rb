@@ -5,11 +5,7 @@ require 'spec_helper'
 #RSpec.configure {|c| c.include SessionsHelper }
 describe BasketsController do
 
+  describe "basket basket count" do
 
-
-     let (:foo2d) {FactoryGirl.create(:food)}
-
-     before { sign_in FactoryGirl.create(:user)}
-
-
+end
 end

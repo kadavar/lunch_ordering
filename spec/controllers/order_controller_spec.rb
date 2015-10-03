@@ -5,15 +5,12 @@ RSpec.describe OrdersController, :type => :controller do
 
   describe "get order response" do
 
-    it "displays all users" do
+    it "get orders.json" do
       @user=FactoryGirl.create(:user)
       sign_in(@user,no_capybara: true)
       get :getJsons, :format => :json
-
-       response.should be_success
-
+      response.should be_success
+      User.delete_all
     end
   end
-
-
 end
