@@ -19,9 +19,9 @@ describe "Foods page" do
 
   describe "Visit new food page" do
 
-    it { should have_title('New Food')}
-    it { should have_content('New Food')}
-    it { should have_button('Create Food')}
+    it { should have_title('New Food') }
+    it { should have_content('New Food') }
+    it { should have_button('Create Food') }
 
     let(:submit) { "Create Food" }
     describe "add a new food" do
@@ -98,9 +98,9 @@ describe "Foods page" do
         FactoryGirl.create(:food)
         visit foods_path
       end
-      let(:to_menu) {"Add to Menu"}
-      let(:remove) {"Remove from Menu"}
-      let(:delete) {"Delete"}
+      let(:to_menu) { "Add to Menu" }
+      let(:remove) { "Remove from Menu" }
+      let(:delete) { "Delete" }
       it "Food have add to menu link" do
         expect(page).to have_link(to_menu)
 
@@ -109,7 +109,7 @@ describe "Foods page" do
         expect { click_on to_menu }.to change(Menu.todayMenu.foods, :count)
         expect(page).to have_link(remove)
         expect(page).not_to have_link(delete)
-       end
+      end
 
       describe "remove from menu" do
         before { click_on to_menu }
@@ -127,55 +127,52 @@ describe "Foods page" do
     end
 
   end
-  describe "show" do
-    before {
-      @f=FactoryGirl.create(:food)
-      visit food_path(@f)
-    }
-    it {should have_content(@f.name)}
-  end
-
-  describe "Food have Edit link " do
-    before do
-      @f=FactoryGirl.create(:food)
-      visit foods_path
+  describe "show and edit food " do
+    before { @f=FactoryGirl.create(:food) }
+    describe "show food" do
+      before { visit food_path(@f) }
+      it { should have_content(@f.name) }
     end
-    it {should have_title ("Today Menu")}
-    it {should have_link (@f.name)}
-    describe "click on food name  " do
-       before {click_on @f.name}
-    it { should have_title('Edit Food') }
-    it { should have_selector('input') }
-    it { should have_content('Update food') }
-    let(:submit) { "Update Food" }
-    describe "with valid data" do
+    describe "Food have Edit link " do
       before do
-        fill_in "Price", with: "32"
-        fill_in "food[name]", with: "Food"
+        visit foods_path
       end
+      it { should have_title ("Today Menu") }
+      it { should have_link (@f.name) }
+      describe "click on food name  " do
+        before { click_on @f.name }
+        it { should have_title('Edit Food') }
+        it { should have_selector('input') }
+        it { should have_content('Update food') }
+        let(:submit) { "Update Food" }
+        describe "with valid data" do
+          before do
+            fill_in "Price", with: "32"
+            fill_in "food[name]", with: "Food"
+          end
 
-      describe "Should update Food " do
-        before { click_button submit }
-        it { should have_selector('div.alert.alert-success') }
-        it { should_not have_selector('div.alert.alert-error') }
+          describe "Should update Food " do
+            before { click_button submit }
+            it { should have_selector('div.alert.alert-success') }
+            it { should_not have_selector('div.alert.alert-error') }
 
+          end
+        end
+
+        describe "with invalid data" do
+          before do
+            fill_in "Price", with: ""
+            fill_in "food[name]", with: ""
+          end
+
+          describe "Should update Food " do
+            before { click_button submit }
+            it { should_not have_selector('div.alert.alert-success') }
+            it { should have_selector('div.alert.alert-error') }
+
+          end
+        end
       end
     end
-
-    describe "with invalid data" do
-      before do
-        fill_in "Price", with: ""
-        fill_in "food[name]", with: ""
-      end
-
-      describe "Should update Food " do
-        before { click_button submit }
-        it { should_not have_selector('div.alert.alert-success') }
-        it { should have_selector('div.alert.alert-error') }
-
-      end
-    end
-   end
   end
-
 end

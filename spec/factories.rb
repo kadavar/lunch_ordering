@@ -11,6 +11,4 @@ FactoryGirl.define do
     sequence(:price) { |n| "32#{n}" }
     course "first"
   end
-
-
 end

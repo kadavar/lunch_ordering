@@ -95,70 +95,74 @@ describe "Orders Pages" do
   describe "Orders Page" do
     describe "visit as non signed user" do
       before {
+
         visit allorders_path }
       it_should_behave_like "non_signed_user", "Orders" do
         let(:title) { "Dates" }
       end
     end
-    describe "User is not admin" do
+    describe "visit as signed user" do
       before {
         sign_in(@user)
-        not_admin(@user)
-        visit allorders_path }
-
-      it { should have_title("Dashboard") }
-    end
-
-    describe "User is admin" do
-      before {
-        sign_in(@user)
-        create_admin(@user)
-        visit allorders_path
       }
-      it { should have_title("Dates") }
-      describe "Doesn`t contain orders" do
-        it { should have_content("No Orders") }
-        it { should have_button("Submit") }
-      end
-      describe "Contain orders" do
+      describe "User is not admin" do
         before {
-          prepareOrders(@user)
+          not_admin(@user)
           visit allorders_path }
-        after { Order.delete_all }
-        it_should_behave_like "contain_orders"
 
+        it { should have_title("Dashboard") }
+      end
 
-        describe "Orders page" do
+      describe "User is admin" do
+        before {
+
+          create_admin(@user)
+          visit allorders_path
+        }
+        it { should have_title("Dates") }
+        describe "Doesn`t contain orders" do
+          it { should have_content("No Orders") }
+          it { should have_button("Submit") }
+        end
+        describe "Contain orders" do
           before {
-            yesterdayOrders
-            visit allorders_path
-          }
-          describe  "Doesn`t contain yestarday orders " do
-            it { should have_content("No Orders") }
-          end
-          describe "Find yestarday orders " do
+            prepareOrders(@user)
+            visit allorders_path }
+          after { Order.delete_all }
+          it_should_behave_like "contain_orders"
+
+
+          describe "Orders page" do
             before {
+              yesterdayOrders
               visit allorders_path
-              fill_in "search", with: (Date.today-1).to_s
-              click_on "Submit"
             }
-            it_should_behave_like "contain_orders"
+            describe "Doesn`t contain yestarday orders " do
+              it { should have_content("No Orders") }
+            end
+            describe "Find yestarday orders " do
+              before {
+                visit allorders_path
+                fill_in "search", with: (Date.today-1).to_s
+                click_on "Submit"
+              }
+              it_should_behave_like "contain_orders"
+            end
+
           end
 
         end
 
       end
-
     end
   end
-
   describe "render getOrders.json" do
     before {
       Order.delete_all
       @order=Order.create(user_id: @user.id)
       visit getOrders_path
     }
-    it { should have_content( "order" ) }
+    it { should have_content("order") }
     it "includes orders" do
       @order_json = [{"order" => {"id" => @order.id, "user_id" => @user.id, "created_at" => @order.created_at, "updated_at" => @order.updated_at}}].to_json
       Order.getJson.should be_json_eql(@order_json)
